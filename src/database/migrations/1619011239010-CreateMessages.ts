@@ -3,7 +3,6 @@ import {MigrationInterface, QueryRunner, Table} from "typeorm";
 export class CreateMessages1619011239010 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-           
         await queryRunner.createTable(
             new Table({
                 name: "messages",
@@ -15,7 +14,8 @@ export class CreateMessages1619011239010 implements MigrationInterface {
                     },
                     {
                         name: "admin_id",
-                        type: "uuid"
+                        type: "uuid",
+                        isNullable: true,
                     },
                     {
                         name: "user_id",

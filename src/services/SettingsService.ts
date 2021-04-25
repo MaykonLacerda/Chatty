@@ -16,23 +16,22 @@ class SettingsService {
 
     async create({chat, username} : ISettingsCreate) {
         //Select * from settings where username = "username" limit 1;
-        const userAlreadyExists = await this.settingsRepository.findOne({
-            username
-        })
-
-        if(userAlreadyExists){
-            throw new Error("User already exists!")
-        }
-
-        //Criando objeto dentro da tabela
-        const settings = this.settingsRepository.create({
+        const settingsAlreadyExists = await this.settingsRepository.findOne({
+            username,
+          });
+      
+          if (settingsAlreadyExists) {
+            throw new Error('Settings already exists.');
+          }
+      
+          const setting = this.settingsRepository.create({
             chat,
-            username
-        })
-
-        await this.settingsRepository.save(settings)
-
-        return settings
+            username,
+          });
+      
+          await this.settingsRepository.save(setting);
+      
+          return setting;
     }
     
 }
